@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.hover{
+  cursor: pointer;
+}
+
+.hover:hover{
+  text-decoration: underline;
+}

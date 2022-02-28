@@ -11,6 +11,7 @@ interface BodyData extends NextApiRequest {
         'nombre': string;
         'descripcion': string;
         'precio': number;
+        'entityId': string;
     };
   }
 export default async function handler(

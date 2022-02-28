@@ -61,7 +61,7 @@ export interface ItemForm {
   precio: string;
 }
 export interface ItemDTO {
-  id: string;
+  entityId: string;
   imagen: string;
   nombre: string;
   descripcion: string;
