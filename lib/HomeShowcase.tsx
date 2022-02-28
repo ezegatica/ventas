@@ -21,7 +21,7 @@ export default function HomeShowcase() {
       <ul>
         {items &&
           items.map((post: ItemDTO) => (
-            <Link href={`/item/${post.entityId}`} key={post.entityId}>
+            <Link href={`/item/${post.id}`} key={post.id}>
               <li className="hover">
                 {post.nombre} - {post.descripcion} - ${post.precio}
               </li>

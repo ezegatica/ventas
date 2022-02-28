@@ -1,14 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { Item, searchItemByID } from "../../../lib/redis";
 
-type Data = {
-  id: string | string[]
-}
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Item[]>
 ) {
-    const { id } = req.query
-  res.status(200).json({ id })
+  const query:any = req.query;
+  const item = await searchItemByID(query.id);
+  res.status(200).json(item)
 }

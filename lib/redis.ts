@@ -1,5 +1,5 @@
 import { Client, Entity, Schema, Repository } from "redis-om";
-
+import crypto from 'crypto';
 const client = new Client();
 
 async function connect() {
@@ -13,6 +13,7 @@ export class Item extends Entity {}
 let schema = new Schema(
   Item,
   {
+    id: { type: "string", textSearch: true },
     imagen: { type: "string" },
     nombre: { type: "string", textSearch: true },
     precio: { type: "number" },
@@ -26,11 +27,28 @@ let schema = new Schema(
 export async function searchItem(query: string): Promise<Item[]> {
   await connect();
   const repository = new Repository(schema, client);
-  const items: Item[] = await repository.search().where('nombre').match(query).or('descripcion').match(query).return.all();
+  const items: Item[] = await repository
+    .search()
+    .where("nombre")
+    .match(query)
+    .or("descripcion")
+    .match(query)
+    .return.all();
   return items;
 }
 
-export async function getAllItems(): Promise<Item[]>{
+export async function searchItemByID(id: string): Promise<Item[]> {  
+  await connect();
+  const repository = new Repository(schema, client);
+  const item: Item[] = await repository
+    .search()
+    .where("id")
+    .match(id)
+    .return.all();
+  return item;
+}
+
+export async function getAllItems(): Promise<Item[]> {
   await connect();
   const repository = new Repository(schema, client);
   const items: Item[] = await repository.search().return.all();
@@ -38,12 +56,18 @@ export async function getAllItems(): Promise<Item[]>{
 }
 
 export async function createItem(data: ItemDTO): Promise<string> {
-  if (data.descripcion === "" || data.nombre === "" || !data){
+  if (data.descripcion === "" || data.nombre === "" || !data) {
     throw new Error("El nombre o la descripcion no pueden estar vacios");
   }
   await connect();
   const repository = new Repository(schema, client);
-  const item = repository.createEntity(data);
+  const item = repository.createEntity({ 
+    nombre: data.nombre,
+    descripcion: data.descripcion,
+    imagen: data.imagen,
+    precio: data.precio,
+    id: crypto.randomUUID().split("-").join("")
+   });
   const id: string = await repository.save(item);
   return id;
 }
@@ -61,7 +85,7 @@ export interface ItemForm {
   precio: string;
 }
 export interface ItemDTO {
-  entityId: string;
+  id: string;
   imagen: string;
   nombre: string;
   descripcion: string;
