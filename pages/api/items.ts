@@ -1,22 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createItem } from "../../lib/redis";
+import { Item, getAllItems } from "../../lib/redis";
 
-type ResponseData = {
-  id: string;
+type Data = {
+  items: Item[];
 };
-interface BodyData extends NextApiRequest {
-    body: {
-        'imagen': string;
-        'nombre': string;
-        'descripcion': string;
-        'precio': number;
-    };
-  }
+
 export default async function handler(
-  req: BodyData,
-  res: NextApiResponse<ResponseData>
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
 ) {
-  const id = await createItem(req.body);
-  res.status(200).json({ id });
+  const items = await getAllItems();
+  res.status(200).json({ items });
 }

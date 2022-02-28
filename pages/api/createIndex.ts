@@ -10,6 +10,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  await createIndex();
+  // await createIndex();
   res.status(200).json({ message: "Dou!" });
 }

@@ -30,7 +30,17 @@ export async function searchItem(query: string): Promise<Item[]> {
   return items;
 }
 
+export async function getAllItems(): Promise<Item[]>{
+  await connect();
+  const repository = new Repository(schema, client);
+  const items: Item[] = await repository.search().return.all();
+  return items;
+}
+
 export async function createItem(data: ItemDTO): Promise<string> {
+  if (data.descripcion === "" || data.nombre === "" || !data){
+    throw new Error("El nombre o la descripcion no pueden estar vacios");
+  }
   await connect();
   const repository = new Repository(schema, client);
   const item = repository.createEntity(data);
@@ -51,6 +61,7 @@ export interface ItemForm {
   precio: string;
 }
 export interface ItemDTO {
+  id: string;
   imagen: string;
   nombre: string;
   descripcion: string;
