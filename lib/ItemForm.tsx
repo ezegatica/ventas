@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ItemDTO, ItemForm } from "./redis";
+import { ItemDTO, ItemForm } from "./database";
 import axios, { AxiosResponse } from "axios";
 export default function ItemFormComponent() {
   const [state, setState] = useState<ItemForm>({
@@ -25,7 +25,7 @@ export default function ItemFormComponent() {
       precio: "",
       imagen: "",
     });
-    console.log(data);
+    // console.log(data);
   };
   const updateState = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });

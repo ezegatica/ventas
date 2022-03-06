@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import ItemForm from '../lib/ItemForm'
+import ItemForm from '~/lib/ItemForm'
 
 const Home: NextPage = () => {
   return (

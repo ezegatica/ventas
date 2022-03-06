@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ItemDTO } from "./redis";
+import { ItemDTO } from "./database";
 import Link from "next/link";
 
 export default function HomeShowcase() {
@@ -21,7 +21,7 @@ export default function HomeShowcase() {
       <ul>
         {items &&
           items.map((post: ItemDTO) => (
-            <Link href={`/item/${post.id}`} key={post.id}>
+            <Link href={`/item/${post.uid}`} key={post.uid}>
               <li className="hover">
                 {post.nombre} - {post.descripcion} - ${post.precio}
               </li>

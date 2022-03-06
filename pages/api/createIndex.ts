@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createIndex } from "../../lib/redis";
+import { createIndex } from "../../lib/database";
 
 type Data = {
   message: string;

@@ -1,5 +1,6 @@
 import { Client, Entity, Schema, Repository } from "redis-om";
-import crypto from 'crypto';
+import crypto from "crypto";
+
 const client = new Client();
 
 async function connect() {
@@ -7,13 +8,19 @@ async function connect() {
     await client.open(process.env.REDIS_URL);
   }
 }
+export async function disconnect() {
+  if (client.isOpen()) {
+    console.log(client.isOpen());
+    await client.close();
+  } 
+}
 
 export class Item extends Entity {}
 
 let schema = new Schema(
   Item,
   {
-    id: { type: "string", textSearch: true },
+    uid: { type: "string", textSearch: true },
     imagen: { type: "string" },
     nombre: { type: "string", textSearch: true },
     precio: { type: "number" },
@@ -37,15 +44,19 @@ export async function searchItem(query: string): Promise<Item[]> {
   return items;
 }
 
-export async function searchItemByID(id: string): Promise<Item[]> {  
+export async function searchItemByID(idInput: string): Promise<Item[]> {
   await connect();
   const repository = new Repository(schema, client);
-  const item: Item[] = await repository
+  const items: Item[] = await repository
     .search()
-    .where("id")
-    .match(id)
+    .where("nombre")
+    .match(idInput)
+    .or("descripcion")
+    .match(idInput)
+    .or("uid")
+    .match(idInput)
     .return.all();
-  return item;
+  return items;
 }
 
 export async function getAllItems(): Promise<Item[]> {
@@ -61,13 +72,13 @@ export async function createItem(data: ItemDTO): Promise<string> {
   }
   await connect();
   const repository = new Repository(schema, client);
-  const item = repository.createEntity({ 
+  const item = repository.createEntity({
     nombre: data.nombre,
     descripcion: data.descripcion,
     imagen: data.imagen,
     precio: data.precio,
-    id: crypto.randomUUID().split("-").join("")
-   });
+    uid: crypto.randomUUID().split("-").join("").substring(0, 5),
+  });
   const id: string = await repository.save(item);
   return id;
 }
@@ -85,7 +96,7 @@ export interface ItemForm {
   precio: string;
 }
 export interface ItemDTO {
-  id: string;
+  uid: string;
   imagen: string;
   nombre: string;
   descripcion: string;

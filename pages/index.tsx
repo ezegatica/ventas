@@ -1,8 +1,17 @@
-import HomeContainer from "../lib/HomeContainer";
-import SearchForm from "../lib/SearchForm";
-import HomeShowcase from "../lib/HomeShowcase";
+import React, {useEffect} from "react";
+import HomeContainer from "~/lib/HomeContainer";
+import SearchForm from "~/lib/SearchForm";
+import HomeShowcase from "~/lib/HomeShowcase";
+import { disconnect } from "~/lib/redis";
 
-export default function search() {
+export default function Index() {
+  // useEffect(() => {
+  //   return () => {
+  //     disconnect();
+  //   };
+  //   //eslint-disable-next-line
+  // }, []);
+
   return (
     <HomeContainer>
       <SearchForm />

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Item, getAllItems } from "../../lib/redis";
+import { Item, getAllItems } from "../../lib/database";
 
 type Data = {
   items: Item[];
