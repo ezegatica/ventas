@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
-import HomeContainer from "~/lib/HomeContainer";
-import SearchForm from "~/lib/SearchForm";
-import HomeShowcase from "~/lib/HomeShowcase";
-import { disconnect } from "~/lib/redis";
+import HomeContainer from "../lib/HomeContainer";
+import SearchForm from "../lib/SearchForm";
+import HomeShowcase from "../lib/HomeShowcase";
+// import { disconnect } from "../lib/database";
 
 export default function Index() {
   // useEffect(() => {

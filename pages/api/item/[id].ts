@@ -1,10 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Item, searchItemByID } from "../../../lib/database";
+import { ItemDocument as Item } from "../../../lib/models/Item";
+import { searchItemByID } from "../../../lib/database";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Item[]>
+  res: NextApiResponse<Item>
 ) {
   const query:any = req.query;
   const item = await searchItemByID(query.id);

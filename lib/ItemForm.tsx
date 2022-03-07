@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import { ItemDTO, ItemForm } from "./database";
 import axios, { AxiosResponse } from "axios";
+import { ItemInput } from "./models/Item";
 export default function ItemFormComponent() {
-  const [state, setState] = useState<ItemForm>({
+  const [state, setState] = useState<ItemInput>({
     nombre: "",
     descripcion: "",
-    precio: "",
+    precio: +0,
     imagen: "",
   });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { data }: AxiosResponse<any> = await axios.post<ItemDTO>(
+    const { data }: AxiosResponse<any> = await axios.post<ItemInput>(
       "/api/item",
       {
         nombre: state.nombre,
         descripcion: state.descripcion,
-        precio: parseInt(state.precio),
+        precio: state.precio,
         imagen: state.imagen,
       }
     );
     setState({
       nombre: "",
       descripcion: "",
-      precio: "",
+      precio: 0,
       imagen: "",
     });
     // console.log(data);
