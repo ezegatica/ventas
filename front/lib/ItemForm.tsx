@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { ItemInput } from "./models/Item";
+import { ItemInput } from "./dto/Item.dto";
 export default function ItemFormComponent() {
   const [state, setState] = useState<ItemInput>({
     nombre: "",

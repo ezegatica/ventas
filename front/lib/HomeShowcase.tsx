@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ItemDocument } from "./models/Item";
+import { ItemDocument } from "./dto/Item.dto";
 
 export default function HomeShowcase() {
   useEffect(() => {
