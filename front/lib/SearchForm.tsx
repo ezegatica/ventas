@@ -9,7 +9,7 @@ export default function SearchItem() {
     const query: string = e.target.value;
     if (query.length > 2) {
       const params = new URLSearchParams({ query });
-      const res = await axios.get(`/api/search?${params}`);
+      const res = await axios.get(`${process.env.API_URL}/search?${params}`);
       setHits(res.data["items"]);
     }
   };

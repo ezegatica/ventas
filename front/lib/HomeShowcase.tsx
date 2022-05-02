@@ -11,7 +11,7 @@ export default function HomeShowcase() {
   const [items, setItems] = useState<ItemDocument[]>([]);
 
   const getItems = async () => {
-    const { data } = await axios.get(`http://localhost:3000/api/items`);
+    const { data } = await axios.get(`${process.env.API_URL}/items`);
     setItems(data.items);
   };
 

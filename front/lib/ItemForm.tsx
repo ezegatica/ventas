@@ -11,7 +11,7 @@ export default function ItemFormComponent() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { data }: AxiosResponse<any> = await axios.post<ItemInput>(
-      "/api/item",
+      process.env.API_URL + "/items",
       {
         nombre: state.nombre,
         descripcion: state.descripcion,
