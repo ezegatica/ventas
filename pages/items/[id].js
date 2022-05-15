@@ -16,7 +16,7 @@ const ItemPage = ({ item, success }) => {
               El producto que estas tratando de ver ya fue vendido a otra persona. Guardate esta pagina, porque si por algun motivo se cancela la compra, podras comprarlo!
             </p>
           </Alert> :
-          <Image src="/wave-haikei.svg" />
+          null
         }
         <Row className="item">
           <Col sm={6} >
