@@ -13,6 +13,7 @@ const ItemPage = ({ item, success }) => {
         <Head>
           <title>{item.nombre} - Venta de Garage</title>
         </Head>
+
         {show ?
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Oh no! El producto ya fue vendido!</Alert.Heading>
