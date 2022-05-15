@@ -17,9 +17,11 @@ const ItemSchema = new mongoose.Schema({
     maxlength: [240, 'La descripcion no puede tener mas de 240 caracteres']
   },
   imagen: {
-    type: String,
+    type: Array,
     default:
-      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+      [
+        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+      ]
   },
   precio: {
     type: Number,

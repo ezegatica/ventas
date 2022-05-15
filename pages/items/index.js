@@ -22,7 +22,6 @@ export async function getServerSideProps() {
     item._id = item._id.toString();
     return item;
   });
-
   return { props: { items: items } };
 }
 

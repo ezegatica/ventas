@@ -2,7 +2,7 @@ import dbConnect from '../../lib/dbConnect';
 import Item from '../../models/Item';
 import formatPrice from '../../lib/formatPrice';
 import React, { useState } from 'react';
-import { Alert, Button, Col, Row, Image } from 'react-bootstrap';
+import { Alert, Button, Col, Row, Image, Carousel, Container } from 'react-bootstrap';
 
 const ItemPage = ({ item, success }) => {
   const [show, setShow] = useState(item?.vendido || false);
@@ -18,28 +18,38 @@ const ItemPage = ({ item, success }) => {
           </Alert> :
           null
         }
-        <Row className="item">
-          <Col sm={6} >
-            <Image src={item.imagen} fluid style={{ padding: 20 }} />
-          </Col>
-          <Col className="info">
-            <h2>{item.nombre}</h2>
-            <br />
-            <br />
-            <p>{item.descripcion}</p>
-            <Row className="buttonRow">
-              <Col style={{ textAlign: "right" }}>
-                <p>Precio: {formatPrice(item.precio)}</p>
-                <a href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_CELULAR}&text=Hola! Estoy interesado en un producto de tu venta de garage '${item.nombre}'`}>
-                  <Button id="buy" variant="primary" disabled={item.vendido}>
-                    Consultar! {' '}
-                    <Image src="/whatsapp.svg" height={24} width={24} />
-                  </Button>
-                </a>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <Container fluid>
+
+          <Row className="item">
+            <Col sm={6} >
+              <Carousel draggable variant="dark">
+                {item.imagen.map((link, index) => (
+                  <Carousel.Item key={index}>
+                    <Image src={link} fluid style={{ padding: 20 }} />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+
+            </Col>
+            <Col className="info">
+              <h2>{item.nombre}</h2>
+              <br />
+              <br />
+              <p>{item.descripcion}</p>
+              <Row className="buttonRow">
+                <Col style={{ textAlign: "right" }}>
+                  <p>Precio: {formatPrice(item.precio)}</p>
+                  <a href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_CELULAR}&text=Hola! Estoy interesado en un producto de tu venta de garage '${item.nombre}'`}>
+                    <Button id="buy" variant="primary" disabled={item.vendido}>
+                      Consultar! {' '}
+                      <Image src="/whatsapp.svg" height={24} width={24} />
+                    </Button>
+                  </a>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       </> :
       <>
         <p>
