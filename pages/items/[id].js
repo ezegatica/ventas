@@ -13,10 +13,10 @@ const ItemPage = ({ item, success }) => {
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Oh no! El producto ya fue vendido!</Alert.Heading>
             <p>
-              El producto que estas tratando de ver, ya fue vendido a otro usuario. En caso de que el otro usuario haya cancelado la compra, podras comprarlo!
+              El producto que estas tratando de ver ya fue vendido a otra persona. Guardate esta pagina, porque si por algun motivo se cancela la compra, podras comprarlo!
             </p>
           </Alert> :
-          null
+          <Image src="/wave-haikei.svg" />
         }
         <Row className="item">
           <Col sm={6} >
