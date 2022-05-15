@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Navbar from '../components/navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/global.css';
+import '../styles/item.css';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

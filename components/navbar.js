@@ -6,7 +6,8 @@ import {
   Form,
   FormControl,
   Container,
-  Button
+  Button,
+  Image
 } from 'react-bootstrap';
 import Link from 'next/link';
 import CustomSpan from './navbar.span'
@@ -14,29 +15,30 @@ import CustomSpan from './navbar.span'
 
 export default function NavbarComponent() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container fluid>
-        <Navbar.Brand href="/">Venta de garage</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link className='no-link' as={CustomSpan}>
-              <Link href="/" >
-                Home
-              </Link>
-            </Nav.Link>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand href="/">Venta de garage</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+              <Nav.Link className='no-link' as={CustomSpan}>
+                <Link href="/" >
+                  Home
+                </Link>
+              </Nav.Link>
 
-            <Nav.Link className='no-link' as={CustomSpan}>
-              <Link href="/items">
-                Items
-              </Link>
-            </Nav.Link>
-          </Nav>
-          {/* <Form className="d-flex">
+              <Nav.Link className='no-link' as={CustomSpan}>
+                <Link href="/items">
+                  Items
+                </Link>
+              </Nav.Link>
+            </Nav>
+            {/* <Form className="d-flex">
             <FormControl
               type="search"
               placeholder="Search"
@@ -45,8 +47,9 @@ export default function NavbarComponent() {
             />
             <Button variant="outline-success">Search</Button>
           </Form> */}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   );
 }

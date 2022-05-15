@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-weight: 400;
+  line-height: 1.4;
+  color: #55595c;
+  text-align: left;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.info {
+  margin: 30px 30px 15px 0;
+  padding: 30px;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.buttonRow {
+  margin-top: 80px;
+}
+
+#buy {
+  float: right;
+  margin-top: 0px;
+  border-radius: 7px;
+  background-color: #2d3047;
+}
+/* 
+@media screen and (max-width: 929px) {
+  #buy {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-device-width: 575px) {
+  .info {
+    margin: 30px;
+    padding: 30px;
+  }
+} */

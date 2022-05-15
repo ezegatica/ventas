@@ -9,7 +9,7 @@ export default function ItemCard({ item }) {
     <Col>
       <Link href={`/items/${item._id}`}>
         <Card className="hoverable">
-          <Card.Img variant="top" src={item.imagen} height={224} width={224} style={{objectFit: 'contain'}}/>
+          <Card.Img variant="top" src={item.imagen[0]} alt={`Imagen de ${item.nombre}`} height={224} width={224} style={{objectFit: 'contain'}}/>
           <Card.Body>
             <Card.Title>{item.nombre} {item.vendido ? <Badge bg="danger">Vendido</Badge>: null}</Card.Title>
             <Card.Text>
