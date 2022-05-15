@@ -8,7 +8,7 @@ import TruncateText from '../components/truncate.text';
 export default function ItemCard({ item }) {
   return (
     <Col>
-      <Link href={`/${item._id}`}>
+      <Link href={`/items/${item._id}`}>
         <Card style={{ width: '18rem' }} className="hoverable">
           <Card.Img variant="top" src={item.imagen} />
           <Card.Body>
