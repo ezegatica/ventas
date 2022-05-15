@@ -5,7 +5,7 @@ import { Row } from 'react-bootstrap';
 
 const Index = ({ items }) => (
   <>
-    <Row xs={2} md={4}>
+    <Row xs={2} sm={3} md={4} lg={6} className="g-4">
       {items.map(item => (
         <ItemCard item={item} key={item._id} />
       ))}

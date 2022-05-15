@@ -24,6 +24,10 @@ const ItemSchema = new mongoose.Schema({
   precio: {
     type: Number,
     required: [true, 'Proporcione un precio para este objeto']
+  },
+  vendido: {
+    type: Boolean,
+    default: false,
   }
 });
 
