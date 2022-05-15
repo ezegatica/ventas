@@ -3,12 +3,16 @@ import Item from '../../models/Item';
 import formatPrice from '../../lib/formatPrice';
 import React, { useState } from 'react';
 import { Alert, Button, Col, Row, Image, Carousel, Container } from 'react-bootstrap';
+import Head from 'next/head';
 
 const ItemPage = ({ item, success }) => {
   const [show, setShow] = useState(item?.vendido || false);
   return (
     success ?
       <>
+        <Head>
+          <title>{item.nombre} - Venta de Garage</title>
+        </Head>
         {show ?
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Oh no! El producto ya fue vendido!</Alert.Heading>
