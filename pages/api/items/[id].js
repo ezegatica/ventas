@@ -1,29 +1,29 @@
-import dbConnect from '../../../lib/dbConnect'
-import Item from '../../../models/Item'
+import dbConnect from '../../../lib/dbConnect';
+import Item from '../../../models/Item';
 
 export default async function handler(req, res) {
   const {
     query: { id },
-    method,
-  } = req
+    method
+  } = req;
 
-  await dbConnect()
+  await dbConnect();
 
   switch (method) {
     case 'GET' /* Get a model by its ID */:
       try {
-        const item = await Item.findById(id)
+        const item = await Item.findById(id);
         if (!item) {
-          return res.status(400).json({ success: false })
+          return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: item })
+        res.status(200).json({ success: true, data: item });
       } catch (error) {
-        res.status(400).json({ success: false })
+        res.status(400).json({ success: false });
       }
-      break
+      break;
 
     default:
-      res.status(400).json({ success: false })
-      break
+      res.status(400).json({ success: false });
+      break;
   }
 }
