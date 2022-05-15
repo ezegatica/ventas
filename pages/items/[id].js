@@ -67,6 +67,9 @@ export async function getServerSideProps({ params }) {
   await dbConnect();
   if (params.id.match(/^[0-9a-fA-F]{24}$/)) {
     const item = await Item.findById(params.id).lean();
+    if (!item) {
+      return { props: { item: null, success: false } }
+    }
     item._id = item._id.toString();
     return { props: { item: item, success: true } };
   } else {
