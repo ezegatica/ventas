@@ -29,7 +29,7 @@ const ItemPage = ({ item, success }) => {
             <p>{item.descripcion}</p>
             <Row className="buttonRow">
               <Col style={{ textAlign: "right" }}>
-                <p>Price: {formatPrice(item.precio)}</p>
+                <p>Precio: {formatPrice(item.precio)}</p>
                 <a href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_CELULAR}&text=Hola! Estoy interesado en un producto de tu venta de garage '${item.nombre}'`}>
                   <Button id="buy" variant="primary" disabled={item.vendido}>
                     Consultar! {' '}
