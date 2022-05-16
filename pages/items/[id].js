@@ -2,8 +2,9 @@ import dbConnect from '../../lib/dbConnect';
 import Item from '../../models/Item';
 import formatPrice from '../../lib/formatPrice';
 import React, { useState } from 'react';
-import { Alert, Button, Col, Row, Image, Carousel, Container } from 'react-bootstrap';
+import { Alert, Button, Col, Row, Carousel, Container } from 'react-bootstrap';
 import Head from 'next/head';
+import Image from 'next/image';
 
 const ItemPage = ({ item, success }) => {
   const [show, setShow] = useState(item?.vendido || false);
@@ -26,11 +27,11 @@ const ItemPage = ({ item, success }) => {
         <Container fluid>
 
           <Row className="item">
-            <Col sm={6} >
-              <Carousel draggable variant="dark">
+            <Col lg={6} >
+              <Carousel draggable={false} variant="dark">
                 {item.imagen.map((link, index) => (
                   <Carousel.Item key={index}>
-                    <Image src={link} fluid style={{ padding: 20 }} />
+                    <Image src={link} width='1000px' height='500px' quality={100} draggable={false} objectFit='contain'/>
                   </Carousel.Item>
                 ))}
               </Carousel>

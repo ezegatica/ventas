@@ -2,9 +2,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:c": "yarn prebuild && yarn dev",
     "build": "next build",
     "start": "next start",
-    "prettier": "yarn prettier --write ."
+    "prettier": "yarn prettier --write .",
+    "prebuild": "rimraf .next"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
@@ -15,6 +17,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "swr": "^1.0.1"
   },
   "devDependencies": {
