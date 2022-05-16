@@ -13,6 +13,9 @@ const ItemPage = ({ item, success }) => {
       <>
         <Head>
           <title>{item.nombre} - Venta de Garage</title>
+          <meta name="description" content={item.short_descripcion} />
+          <meta name="robots" content= "index, follow"/>
+          <meta name="theme-color" content="#212529"/>
         </Head>
 
         {show ?
@@ -31,7 +34,7 @@ const ItemPage = ({ item, success }) => {
               <Carousel draggable={false} variant="dark">
                 {item.imagen.map((link, index) => (
                   <Carousel.Item key={index}>
-                    <Image src={link} width='1000px' height='500px' quality={100} draggable={false} objectFit='contain'/>
+                    <Image src={link} width='1000px' height='500px' quality={100} draggable={false} objectFit='contain' />
                   </Carousel.Item>
                 ))}
               </Carousel>
