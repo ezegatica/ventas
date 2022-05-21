@@ -13,10 +13,20 @@ const Index = ({ items }) => (
   </Container>
 );
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query: queryProp }) {
   await dbConnect();
-
-  const result = await Item.find({});
+  const { query } = queryProp;
+  let result;
+  if (query) {
+    result = await Item.find({
+      nombre: {
+        $regex: query,
+        $options: 'i'
+      }
+    });
+  } else {
+    result = await Item.find({});
+  }
   const items = result.map(doc => {
     const item = doc.toObject();
     item._id = item._id.toString();

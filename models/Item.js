@@ -4,12 +4,14 @@ const ItemSchema = new mongoose.Schema({
   nombre: {
     type: String,
     required: [true, 'Proporcione un nombre para este objeto'],
-    maxlength: [60, 'El  nombre no puede tener mas de 60 caracteres']
+    maxlength: [60, 'El  nombre no puede tener mas de 60 caracteres'],
+    index: true
   },
   short_descripcion: {
     type: String,
     required: [true, 'Proporcione una descripcion para este objeto'],
-    maxlength: [60, 'La descripcion no puede tener mas de 240 caracteres']
+    maxlength: [60, 'La descripcion no puede tener mas de 240 caracteres'],
+    index: true
   },
   descripcion: {
     type: String,

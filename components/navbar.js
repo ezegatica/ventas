@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router'
 import {
   Navbar,
   Nav,
@@ -14,6 +15,18 @@ import CustomSpan from './navbar.span'
 
 
 export default function NavbarComponent() {
+  const [search, setSearch] = useState('');
+  const router = useRouter()
+  const buscar = (e) => {
+    e?.preventDefault();
+    router.push({
+      pathname: '/items',
+      query: {
+        query: search
+      }
+    });
+  };
+
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -38,15 +51,17 @@ export default function NavbarComponent() {
                 </Link>
               </Nav.Link>
             </Nav>
-            {/* <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
+            <Form className="d-flex" onSubmit={buscar}>
+              <FormControl
+                type="search"
+                placeholder="Buscador"
+                className="me-2"
+                aria-label="Buscador"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <Button variant="outline-light" onClick={() => buscar()}>Buscar</Button>
+            </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
