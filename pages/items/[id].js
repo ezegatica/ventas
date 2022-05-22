@@ -6,6 +6,7 @@ import { Alert, Button, Col, Row, Carousel, Container } from 'react-bootstrap';
 import Head from 'next/head';
 import Image from 'next/image';
 import SearchForm from '../../components/search.form';
+import redis from '../../lib/redis';
 
 const ItemPage = ({ item, success }) => {
   const [show, setShow] = useState(item?.vendido || false);
@@ -73,12 +74,19 @@ const ItemPage = ({ item, success }) => {
 export async function getServerSideProps({ params }) {
   await dbConnect();
   if (params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    const item = await Item.findById(params.id).lean();
-    if (!item) {
-      return { props: { item: null, success: false } }
+    const data = await redis.get(`${process.env.NODE_ENV}:item:${params.id}`)
+    if (data) {
+      const result = JSON.parse(data);
+      return { props: { item: result, success: true } };
+    } else {
+      const item = await Item.findById(params.id).lean();
+      if (!item) {
+        return { props: { item: null, success: false } }
+      }
+      item._id = item._id.toString();
+      await redis.set(`${process.env.NODE_ENV}:item:${params.id}`, JSON.stringify(item));
+      return { props: { item: item, success: true } };
     }
-    item._id = item._id.toString();
-    return { props: { item: item, success: true } };
   } else {
     return { props: { item: null, success: false } }
   }
