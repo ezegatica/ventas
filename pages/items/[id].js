@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Alert, Button, Col, Row, Carousel, Container } from 'react-bootstrap';
 import Head from 'next/head';
 import Image from 'next/image';
+import SearchForm from '../../components/search.form';
 
 const ItemPage = ({ item, success }) => {
   const [show, setShow] = useState(item?.vendido || false);
@@ -14,10 +15,9 @@ const ItemPage = ({ item, success }) => {
         <Head>
           <title>{item.nombre} - Venta de Garage</title>
           <meta name="description" content={item.short_descripcion} />
-          <meta name="robots" content= "index, follow"/>
-          <meta name="theme-color" content="#212529"/>
+          <meta name="robots" content="index, follow" />
+          <meta name="theme-color" content="#212529" />
         </Head>
-
         {show ?
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Oh no! El producto ya fue vendido!</Alert.Heading>
@@ -27,6 +27,7 @@ const ItemPage = ({ item, success }) => {
           </Alert> :
           null
         }
+        <SearchForm />
         <Container fluid>
 
           <Row className="item">
@@ -61,9 +62,10 @@ const ItemPage = ({ item, success }) => {
         </Container>
       </> :
       <>
-        <p>
-          Producto no encontrado!
-        </p>
+        <SearchForm />
+        <Container fluid>
+          <h2>No se encontro el producto que está buscando. Prueba buscando otro.</h2>
+        </Container>
       </>
   );
 };
