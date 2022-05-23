@@ -48,7 +48,9 @@ export async function getServerSideProps({ query: queryProp }) {
           }
         ]
       });
-      await redis.set(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`, JSON.stringify(result));
+      if (result.length !== 0) {
+        await redis.set(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`, JSON.stringify(result));
+      }
     }
 
   } else {
