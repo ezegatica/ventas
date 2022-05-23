@@ -28,7 +28,7 @@ export async function getServerSideProps({ query: queryProp }) {
   let result;
   let fromCache = false;
   if (query) {
-    const data = await redis.get(`${process.env.NODE_ENV}:query:${query}`)
+    const data = await redis.get(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`);
     if (data) {
       result = JSON.parse(data);
       fromCache = true;
@@ -48,7 +48,7 @@ export async function getServerSideProps({ query: queryProp }) {
           }
         ]
       });
-      await redis.set(`${process.env.NODE_ENV}:query:${query}`, JSON.stringify(result));
+      await redis.set(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`, JSON.stringify(result));
     }
 
   } else {
