@@ -2,16 +2,10 @@ import React from 'react';
 import {
   Navbar,
   Nav,
-  NavDropdown,
-  Form,
-  FormControl,
   Container,
-  Button,
-  Image
 } from 'react-bootstrap';
 import Link from 'next/link';
 import CustomSpan from './navbar.span'
-
 
 export default function NavbarComponent() {
   return (
@@ -38,15 +32,6 @@ export default function NavbarComponent() {
                 </Link>
               </Nav.Link>
             </Nav>
-            {/* <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
