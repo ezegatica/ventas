@@ -12,7 +12,7 @@ export default function NavbarComponent() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/">Venta de garage</Navbar.Brand>
+          <Navbar.Brand href="/items">Venta de garage</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -20,17 +20,6 @@ export default function NavbarComponent() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link className='no-link' as={CustomSpan}>
-                <Link href="/" >
-                  Home
-                </Link>
-              </Nav.Link>
-
-              <Nav.Link className='no-link' as={CustomSpan}>
-                <Link href="/items">
-                  Items
-                </Link>
-              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

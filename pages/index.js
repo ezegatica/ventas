@@ -9,7 +9,7 @@ export default function index() {
         <div className="container bg-dark p-5">
           <h1 className="display-4">Bienvenidos a mi venta de garage!</h1>
           <hr />
-          <p>Sin compromiso doña, pase y vea.</p>
+          <p>Pase y vea, sin compromiso.</p>
           <p>Si les interesa algo o quieren saber mas sobre alguna cosa, consultenme que sin problema les respondo.</p>
           <Link href="/items">
             <Button variant="outline-light">
