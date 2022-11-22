@@ -11,7 +11,6 @@ export default function ItemCard({ item }) {
         <Card className="hoverable" >
           <Card.Img as={Image} src={item.imagen[0]} height={224} width={224} style={{objectFit: 'contain'}} quality={50} alt={`Imagen de ${item.nombre}`} placeholder="empty" loading='lazy' />
           {/* <Card.Img as={Image} variant="top" src={item.imagen[0]} alt={`Imagen de ${item.nombre}`} height={224} width={224} style={{objectFit: 'contain'}}/> */}
-          <Image src={item.imagen[0]} height={224} width={224} style={{objectFit: 'contain'}} quality={50} alt={`Imagen de ${item.nombre}`} placeholder="empty" loading='lazy'/>
           <Card.Body>
             <Card.Title>{item.nombre} {item.vendido ? <Badge bg="danger">Vendido</Badge>: null}</Card.Title>
             <Card.Text>
