@@ -18,6 +18,10 @@ const ItemPage = ({ item, success }) => {
           <meta name="description" content={item.short_descripcion} />
           <meta name="robots" content="index, follow" />
           <meta name="theme-color" content="#212529" />
+          <meta
+    property="og:image"
+    content={`https://ventas.ezegatica.com//api/og?title=${item.nombre}&image=${item.imagen[0]}`}
+  />
         </Head>
         {show ?
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
