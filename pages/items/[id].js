@@ -4,7 +4,7 @@ import formatPrice from '../../lib/formatPrice';
 import React, { useState } from 'react';
 import { Alert, Button, Col, Row, Carousel, Container } from 'react-bootstrap';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from "next/image";
 import SearchForm from '../../components/search.form';
 import redis from '../../lib/redis';
 
@@ -18,6 +18,10 @@ const ItemPage = ({ item, success }) => {
           <meta name="description" content={item.short_descripcion} />
           <meta name="robots" content="index, follow" />
           <meta name="theme-color" content="#212529" />
+          <meta
+    property="og:image"
+    content={`https://ventas.ezegatica.com/api/og?title=${item.nombre}&image=${item.imagen[0]}`}
+  />
         </Head>
         {show ?
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
@@ -36,7 +40,7 @@ const ItemPage = ({ item, success }) => {
               <Carousel draggable={false} variant="dark">
                 {item.imagen.map((link, index) => (
                   <Carousel.Item key={index}>
-                    <Image src={link} width='1000px' height='500px' quality={100} draggable={false} objectFit='contain' />
+                    <Image src={link} width='1000' height='500' quality={100} draggable={false} style={{objectFit: 'contain'}} placeholder='empty' />
                   </Carousel.Item>
                 ))}
               </Carousel>

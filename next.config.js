@@ -3,7 +3,7 @@
  */
 const nextConfig = {
     images: {
-        domains: ['cdn.ezegatica.com', 'upload.wikimedia.org']
+        domains: ['cdn.ezegatica.com', 'upload.wikimedia.org', 'gatica.sirv.com']
     }
 }
 
