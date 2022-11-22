@@ -5,7 +5,7 @@
 - [X] Listar un producto individual
 - [X] Poder contactar al dueño para comprar
 - [X] Crear productos desde un panel de admin
-- [-] Conexión con Firebase Image Hosting para subir mis propias imagenes
+- [X] Conexión con Firebase Image Hosting para subir mis propias imagenes
     - Se cambio a CDN
 - [X] Cambiar imagenes a array de imagenes para poder hacer un carrousel
 - [X] Hacer una linda landing
