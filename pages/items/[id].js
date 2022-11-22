@@ -20,7 +20,7 @@ const ItemPage = ({ item, success }) => {
           <meta name="theme-color" content="#212529" />
           <meta
     property="og:image"
-    content={`https://ventas.ezegatica.com//api/og?title=${item.nombre}&image=${item.imagen[0]}`}
+    content={`https://ventas.ezegatica.com/api/og?title=${item.nombre}&image=${item.imagen[0]}`}
   />
         </Head>
         {show ?
