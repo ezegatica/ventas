@@ -10,7 +10,7 @@ export default function index() {
         <hr />
         <p>Pase y vea, sin compromiso.</p>
         <p>Si les interesa algo o quieren saber mas sobre alguna cosa, consultenme que sin problema les respondo.</p>
-        <Link href="/items" legacyBehavior>
+        <Link href="/items">
           <Button variant="outline-light">
             Ver el listado
           </Button>
