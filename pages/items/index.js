@@ -3,7 +3,6 @@ import SearchForm from '../../components/search.form';
 import Item from '../../models/Item';
 import ItemCard from '../../components/item.card';
 import { Row, Container } from 'react-bootstrap';
-import redis from '../../lib/redis';
 
 const Index = ({ items }) => (
   <>
@@ -28,7 +27,6 @@ export async function getServerSideProps({ query: queryProp }) {
   let result;
   let fromCache = false;
   if (query) {
-    const data = await redis.get(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`);
     if (data) {
       result = JSON.parse(data);
       fromCache = true;
@@ -49,18 +47,16 @@ export async function getServerSideProps({ query: queryProp }) {
         ]
       });
       if (result.length !== 0) {
-        await redis.set(`${process.env.NODE_ENV}:query:${query.toLowerCase()}`, JSON.stringify(result));
       }
     }
 
   } else {
-    const data = await redis.get(`${process.env.NODE_ENV}:list:all`)
+    const data = false;
     if (data) {
       result = JSON.parse(data);
       fromCache = true;
     } else {
       result = await Item.find({});
-      await redis.set(`${process.env.NODE_ENV}:list:all`, JSON.stringify(result));
     }
   }
   if (fromCache) {
