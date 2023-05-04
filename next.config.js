@@ -1,10 +1,11 @@
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['cdn.ezegatica.com', 'upload.wikimedia.org', 'gatica.sirv.com']
-    }
+  images: {
+    domains: ['cdn.ezegatica.com', 'i.ezegatica.com', 'gatica.sirv.com']
+  },
+  experimental: {
+    appDir: true,
+  },
 }
 
 module.exports = nextConfig

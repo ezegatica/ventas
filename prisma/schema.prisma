@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model Item {
+  id                Int      @id @default(autoincrement())
+  slug              String   @unique
+  nombre            String
+  descripcion       String
+  short_descripcion String
+  precio            Int
+  vendido           Boolean  @default(false)
+  imagen            String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([nombre, descripcion], map: "nombre_1_descripcion_1")
+  @@index([nombre], map: "nombre_1")
+  @@index([slug], map: "slug_1")
+  @@index([short_descripcion], map: "short_descripcion_1")
+}
