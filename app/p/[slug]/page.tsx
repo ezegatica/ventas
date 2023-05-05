@@ -6,17 +6,15 @@ import { get } from "@vercel/edge-config";
 import Link from "next/link";
 import { Gallery } from "../../../components/gallery";
 import clsx from "clsx";
+import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
+import { getItemBySlug } from "../../../lib/querys";
 
 export default async function ProductPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const item = await prisma.item.findUnique({
-    where: {
-      slug: params.slug,
-    },
-  });
+  const item = await getItemBySlug(params.slug);
 
   if (!item) {
     notFound();
@@ -36,6 +34,26 @@ export default async function ProductPage({
 
   return (
     <div>
+      <div className="border-l-4 border-red-400 bg-red-50 p-4">
+        <div className="flex container">
+          <div className="flex-shrink-0">
+            <ExclamationTriangleIcon
+              className="h-5 w-5 text-red-400"
+              aria-hidden="true"
+            />
+          </div>
+          <div className="ml-3">
+            <p className="text-sm text-red-700">
+              <span
+                className="font-medium text-red-700 underline hover:text-red-600"
+              >
+                El producto ya fue vendido.
+              </span>
+              {" "}Guardate esta pagina, porque si por algun motivo se cancela la compra, podras comprarlo.
+            </p>
+          </div>
+        </div>
+      </div>
       <nav aria-label="Breadcrumb" className="pt-6 pb-4">
         <ol
           role="list"

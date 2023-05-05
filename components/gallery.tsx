@@ -22,7 +22,7 @@ export function Gallery({
   }
 
   const buttonClassName =
-    'px-9 cursor-pointer ease-in-and-out duration-200 transition-bg bg-gray-300 hover:bg-gray-400';
+    'px-9 cursor-pointer ease-in-and-out duration-200 transition-bg bg-gray-200 hover:bg-gray-300';
 
   return (
     <div className="h-full">

@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import ItemCard from "../components/ui/item-card";
+import { getItems } from "../lib/querys";
 
 export const preferredRegion = "home";
 export const dynamic = "force-dynamic";
@@ -11,26 +12,7 @@ export default async function Home({
 }) {
   const query = (searchParams?.q as string) || "";
 
-  const items = query
-    ? await prisma.item.findMany({
-        where: {
-          OR: [
-            {
-              nombre: {
-                contains: query,
-                mode: "insensitive",
-              },
-            },
-            {
-              descripcion: {
-                contains: query,
-                mode: "insensitive",
-              },
-            },
-          ],
-        },
-      })
-    : await prisma.item.findMany();
+  const items = await getItems(query);
 
   return (
     <div className="bg-white">
