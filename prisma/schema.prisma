@@ -29,4 +29,5 @@ model Item {
   @@index([nombre], map: "nombre_1")
   @@index([slug], map: "slug_1")
   @@index([short_descripcion], map: "short_descripcion_1")
+  @@map("items")
 }
