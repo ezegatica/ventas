@@ -4,6 +4,7 @@ import formatPrice from "../../../lib/format-price";
 import Image from "next/image";
 import { get } from "@vercel/edge-config";
 import Link from "next/link";
+import { Gallery } from "../../../components/gallery";
 
 export default async function ProductPage({
   params,
@@ -74,14 +75,14 @@ export default async function ProductPage({
         <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 sm:px-6 sm:pt-8 md:p-6 lg:p-8">
           <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 md:grid-cols-12 lg:gap-x-8">
             <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-              <Image
-                src={item.imagen[0]}
-                width={500}
-                height={500}
-                quality={75}
-                alt={`Imagen de ${item.nombre}`}
-                className="object-cover object-center"
-              />
+              <div className="lg:col-span-4">
+                <Gallery
+                  images={item.imagen.map((image) => ({
+                    src: image,
+                    altText: item.nombre,
+                  }))}
+                />
+              </div>
             </div>
             <div className="sm:col-span-8 lg:col-span-7">
               <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
@@ -103,7 +104,7 @@ export default async function ProductPage({
                   Descripcion del producto
                 </h3>
 
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-md font-medium text-gray-900">
                   {item.descripcion}
                 </p>
 
