@@ -1,5 +1,4 @@
 import './globals.css'
-import 'flowbite';
 
 import { Inter } from 'next/font/google'
 

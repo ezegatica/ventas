@@ -1,8 +1,9 @@
-import Link from "next/link";
 import prisma from "../../../lib/prisma";
-import { notFound } from "next/navigation";
-import ImageCarousel from "../../../components/image-carousel";
+import { notFound, redirect } from "next/navigation";
 import formatPrice from "../../../lib/format-price";
+import Image from "next/image";
+import { get } from "@vercel/edge-config";
+import Link from "next/link";
 
 export default async function ProductPage({
   params,
@@ -14,8 +15,21 @@ export default async function ProductPage({
       slug: params.slug,
     },
   });
+
   if (!item) {
     notFound();
+  }
+
+  async function consultarItem() {
+    "use server";
+    const phone = await get("phone");
+    redirect(
+      `https://api.whatsapp.com/send?phone=${phone}&text=Hola! Estoy interesado en el producto de tu venta de garage '${item?.nombre}'`
+    );
+  }
+
+  function classNames(...classes: any[]) {
+    return classes.filter(Boolean).join(" ");
   }
 
   return (
@@ -35,8 +49,8 @@ export default async function ProductPage({
                   Items
                 </Link>
                 <svg
-                  width="16"
-                  height="20"
+                  width={16}
+                  height={20}
                   viewBox="0 0 16 20"
                   fill="currentColor"
                   aria-hidden="true"
@@ -46,46 +60,69 @@ export default async function ProductPage({
                 </svg>
               </div>
             </li>
-
             <li className="text-sm">
               <Link
                 href={`/p/${item.slug}`}
                 aria-current="page"
-                className="mr-2 text-sm font-medium text-gray-900"
+                className="font-medium text-gray-500 hover:text-gray-600"
               >
                 {item.nombre}
               </Link>
             </li>
           </ol>
         </nav>
+        <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+          <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 md:grid-cols-12 lg:gap-x-8">
+            <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+              <Image
+                src={item.imagen[0]}
+                width={500}
+                height={500}
+                quality={75}
+                alt={`Imagen de ${item.nombre}`}
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="sm:col-span-8 lg:col-span-7">
+              <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
+                {item.nombre}
+              </h2>
 
-        {/* <!-- Image gallery --> */}
-        <ImageCarousel item={item} />
+              <section aria-labelledby="information-heading" className="mt-2">
+                <h3 id="information-heading" className="sr-only">
+                  Informacion del producto
+                </h3>
 
-        {/* <!-- Product info --> */}
-        <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              {item.nombre}
-            </h1>
-          </div>
+                <p className="text-2xl text-gray-900">
+                  {formatPrice(item.precio)}
+                </p>
+              </section>
 
-          {/* <!-- Options --> */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
-            <h2 className="sr-only">Informacion del producto</h2>
-            <p className="text-3xl tracking-tight text-gray-900">
-              {formatPrice(item.precio)}
-            </p>
-          </div>
+              <section aria-labelledby="options-heading" className="mt-10">
+                <h3 id="options-heading" className="sr-only">
+                  Descripcion del producto
+                </h3>
 
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-            {/* <!-- Description and details --> */}
-            <div>
-              <h3 className="sr-only">Descripcion</h3>
+                <p className="text-sm font-medium text-gray-900">
+                  {item.descripcion}
+                </p>
 
-              <div className="space-y-6">
-                <p className="text-base text-gray-900">{item.descripcion}</p>
-              </div>
+                <form action={consultarItem}>
+                  <button
+                    type="submit"
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Consultar!{" "}
+                    <Image
+                      src="/whatsapp.svg"
+                      height={24}
+                      width={24}
+                      className="ml-2"
+                      alt="Whatsapp icon"
+                    />
+                  </button>
+                </form>
+              </section>
             </div>
           </div>
         </div>
