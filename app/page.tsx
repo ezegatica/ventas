@@ -1,4 +1,3 @@
-import prisma from "@/lib/prisma";
 import ItemCard from "../components/ui/item-card";
 import { getItems } from "../lib/querys";
 
