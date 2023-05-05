@@ -26,6 +26,11 @@ export default function ItemCard({ item }: ItemCardProps) {
             <h3 className="text-sm text-gray-700">
               <span aria-hidden="true" className="absolute inset-0"></span>
               {item.nombre}
+              {item.vendido && (
+                <span className="ml-2 inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
+                Vendido
+              </span>
+              )}
             </h3>
             <p className="mt-1 text-sm text-gray-500">
               {item.short_descripcion}
