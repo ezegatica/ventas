@@ -1,4 +1,3 @@
-import prisma from "../../../lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import formatPrice from "../../../lib/format-price";
 import Image from "next/image";
@@ -8,12 +7,44 @@ import { Gallery } from "../../../components/gallery";
 import clsx from "clsx";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { getItemBySlug } from "../../../lib/querys";
+import { Metadata } from "next";
+import config from "@/app/config";
 
-export default async function ProductPage({
-  params,
-}: {
+type Props = {
   params: { slug: string };
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const item = await getItemBySlug(params.slug);
+  if (!item) {
+    return {
+      title: "Producto no encontrado",
+      description: "El producto que buscas no existe o fue eliminado.",
+    };
+  }
+
+  const ogUrl = new URL(`${config.siteUrl}/api/og/item`);
+  ogUrl.searchParams.set("title", item.nombre);
+  ogUrl.searchParams.set("image", item?.imagen[0]);
+  ogUrl.searchParams.set("price", item?.precio.toString());
+
+  return {
+    title: `${item?.nombre} - ${config.siteName}`,
+    description: item?.short_descripcion,
+    openGraph: {
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: item.short_descripcion,
+        },
+      ],
+    },
+  };
+}
+
+export default async function ProductPage({ params }: Props) {
   const item = await getItemBySlug(params.slug);
 
   if (!item) {

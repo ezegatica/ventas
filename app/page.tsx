@@ -1,8 +1,27 @@
+import { Metadata } from "next";
 import ItemCard from "../components/ui/item-card";
 import { getItems } from "../lib/querys";
+import config from "./config";
 
 export const preferredRegion = "home";
 export const dynamic = "force-dynamic";
+
+
+export const metadata: Metadata = {
+  title: config.siteName,
+  description: "Sitio de compra de productos usados que ya no necesito. Todos los productos se encuentran en buen estado y funcionando.",
+  openGraph: {
+    type: "website",
+    images: [
+      {
+        url: `${config.siteUrl}/api/og/home`,
+        width: 1200,
+        height: 630,
+        alt: "Imagen de portada"
+      }
+    ]
+  }
+}
 
 export default async function Home({
   searchParams,
