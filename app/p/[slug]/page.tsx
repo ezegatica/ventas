@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "El producto que buscas no existe o fue eliminado.",
     };
   }
-
+  const itemUrl = new URL(`${config.siteUrl}/p/${item.slug}`)
   const ogUrl = new URL(`${config.siteUrl}/api/og/item`);
   ogUrl.searchParams.set("title", item.nombre);
   ogUrl.searchParams.set("image", item?.imagen[0]);
@@ -32,6 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${item?.nombre} - ${config.siteName}`,
     description: item?.short_descripcion,
     openGraph: {
+      title: `${item?.nombre} - ${config.siteName}`,
+      description: item?.short_descripcion,
+      url: itemUrl.toString(),
       images: [
         {
           url: ogUrl.toString(),

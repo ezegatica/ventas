@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Sitio de compra de productos usados que ya no necesito. Todos los productos se encuentran en buen estado y funcionando.",
   openGraph: {
     type: "website",
+    title: config.siteName,
+    description: "Sitio de compra de productos usados que ya no necesito. Todos los productos se encuentran en buen estado y funcionando.",
     images: [
       {
         url: `${config.siteUrl}/api/og/home`,
