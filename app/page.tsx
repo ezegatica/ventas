@@ -4,7 +4,8 @@ import { getItems } from "../lib/querys";
 import config from "./config";
 
 export const preferredRegion = "home";
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
+export const revalidate = 3600;
 
 
 export const metadata: Metadata = {
