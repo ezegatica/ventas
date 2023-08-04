@@ -14,6 +14,9 @@ type Props = {
   params: { slug: string };
 };
 
+export const revalidate = 3600;
+export const dynamic = "auto";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getItemBySlug(params.slug);
   if (!item) {
