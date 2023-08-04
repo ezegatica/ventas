@@ -1,0 +1,9 @@
+# General
+./node_modules
+.next
+dist
+
+# Static files
+*.md
+*.json
+*.yml

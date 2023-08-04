@@ -1,35 +1,36 @@
-import { notFound, redirect } from "next/navigation";
-import formatPrice from "../../../lib/format-price";
-import Image from "next/image";
-import { get } from "@vercel/edge-config";
-import Link from "next/link";
-import { Gallery } from "../../../components/gallery";
-import clsx from "clsx";
-import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
-import { getItemBySlug } from "../../../lib/querys";
-import { Metadata } from "next";
-import config from "@/app/config";
+import { notFound, redirect } from 'next/navigation';
+import formatPrice from '../../../lib/format-price';
+import Image from 'next/image';
+import { get } from '@vercel/edge-config';
+import Link from 'next/link';
+import { Gallery } from '../../../components/gallery';
+import clsx from 'clsx';
+import { ExclamationTriangleIcon } from '@heroicons/react/20/solid';
+import { getItemBySlug } from '../../../lib/querys';
+import { Metadata } from 'next';
+import config from '@/app/config';
+import React from 'react';
 
 type Props = {
   params: { slug: string };
 };
 
 export const revalidate = 3600;
-export const dynamic = "auto";
+export const dynamic = 'auto';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getItemBySlug(params.slug);
   if (!item) {
     return {
-      title: "Producto no encontrado",
-      description: "El producto que buscas no existe o fue eliminado.",
+      title: 'Producto no encontrado',
+      description: 'El producto que buscas no existe o fue eliminado.'
     };
   }
-  const itemUrl = new URL(`${config.siteUrl}/p/${item.slug}`)
+  const itemUrl = new URL(`${config.siteUrl}/p/${item.slug}`);
   const ogUrl = new URL(`${config.siteUrl}/api/og/item`);
-  ogUrl.searchParams.set("title", item.nombre);
-  ogUrl.searchParams.set("image", item?.imagen[0]);
-  ogUrl.searchParams.set("price", item?.precio.toString());
+  ogUrl.searchParams.set('title', item.nombre);
+  ogUrl.searchParams.set('image', item?.imagen[0]);
+  ogUrl.searchParams.set('price', item?.precio.toString());
 
   return {
     title: `${item?.nombre} - ${config.siteName}`,
@@ -43,30 +44,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: ogUrl.toString(),
           width: 1200,
           height: 630,
-          alt: item.short_descripcion,
-        },
-      ],
-    },
+          alt: item.short_descripcion
+        }
+      ]
+    }
   };
 }
 
 export default async function ProductPage({ params }: Props) {
   const item = await getItemBySlug(params.slug);
-
+  console.log({ item });
   if (!item) {
     notFound();
   }
 
   async function consultarItem() {
-    "use server";
-    const phone = await get("phone");
+    'use server';
+    const phone = await get('phone');
     redirect(
       `https://api.whatsapp.com/send?phone=${phone}&text=Hola! Estoy interesado en el producto de tu venta de garage '${item?.nombre}'`
     );
   }
 
   function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(" ");
+    return classes.filter(Boolean).join(' ');
   }
 
   return (
@@ -84,7 +85,7 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-sm text-red-700">
                 <span className="font-medium text-red-700 underline hover:text-red-600">
                   El producto ya fue vendido.
-                </span>{" "}
+                </span>{' '}
                 Guardate esta pagina, porque si por algun motivo se cancela la
                 compra, podras comprarlo.
               </p>
@@ -128,9 +129,9 @@ export default async function ProductPage({ params }: Props) {
       <div className="lg:grid lg:grid-cols-6">
         <div className="lg:col-span-4">
           <Gallery
-            images={item.imagen.map((image) => ({
+            images={item.imagen.map(image => ({
               src: image,
-              altText: `Imagen de ${item.nombre}`,
+              altText: `Imagen de ${item.nombre}`
             }))}
           />
         </div>
@@ -152,9 +153,13 @@ export default async function ProductPage({ params }: Props) {
               Descripcion del producto
             </h3>
 
-            <p className="text-md font-medium text-gray-900">
-              {item.descripcion}
-            </p>
+            <div className="text-md font-medium text-gray-900">
+              {item.descripcion.split('\n').map((line, index) => (
+                <p key={`${item.slug}-${index}`} className="mb-2">
+                  {line}
+                </p>
+              ))}
+            </div>
           </section>
           <form action={consultarItem}>
             <button
@@ -162,13 +167,13 @@ export default async function ProductPage({ params }: Props) {
               disabled={item.vendido}
               type="submit"
               className={clsx(
-                "mt-2 flex w-full items-center justify-center bg-gray-700 p-4 text-sm uppercase tracking-wide text-white opacity-90 hover:opacity-100",
+                'mt-2 flex w-full items-center justify-center bg-gray-700 p-4 text-sm uppercase tracking-wide text-white opacity-90 hover:opacity-100',
                 {
-                  "cursor-not-allowed opacity-60": item.vendido,
+                  'cursor-not-allowed opacity-60': item.vendido
                 }
               )}
             >
-              {item.vendido ? "No disponible!" : "Consultar!"}{" "}
+              {item.vendido ? 'No disponible!' : 'Consultar!'}{' '}
               <Image
                 src="/whatsapp.svg"
                 height={24}
