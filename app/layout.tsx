@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import "./globals.css";
-
+import { Analytics } from '@vercel/analytics/react';
 import { Inter } from "next/font/google";
 import Navbar from "../components/layout/navbar";
 
@@ -21,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <main>{children}</main>
+        <Analytics />
       </body>
     </html>
   );
