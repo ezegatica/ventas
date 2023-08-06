@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import ItemCard from "../components/ui/item-card";
-import { getItems } from "../lib/querys";
 import config from "./config";
+import HomeItemGrid from "../components/async/home-items-grid";
+import { Suspense } from "react";
+import HomeItemGridLoading from "../components/layout/home-item-grid-loading";
 
 export const preferredRegion = "home";
 export const dynamic = "auto";
@@ -26,14 +27,12 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams?: { [key: string]: string | string[] | null };
 }) {
   const query = (searchParams?.q as string) || "";
-
-  const items = await getItems(query);
 
   return (
     <div className="bg-white">
@@ -41,15 +40,13 @@ export default async function Home({
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           {query ? "Resultados de la búsqueda" : "Productos a la venta"}
         </h2>
-
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {items.length > 0 ? (
-            items.map((item) => <ItemCard item={item} key={item.slug} />)
-          ) : (
-            <p className="text-2xl font-bold text-gray-900">
-              No se encontraron resultados para &quot;{query}&quot;
-            </p>
-          )}
+          <Suspense fallback={
+            <HomeItemGridLoading />
+          }>
+            {/* @ts-expect-error Server Component */}
+          <HomeItemGrid query={query}/>
+          </Suspense>
         </div>
       </div>
     </div>
