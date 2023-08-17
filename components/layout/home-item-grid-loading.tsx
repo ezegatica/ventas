@@ -6,6 +6,8 @@ export default function HomeItemGridLoading() {
       <ItemGridLoadingCard />
       <ItemGridLoadingCard />
       <ItemGridLoadingCard />
+      <ItemGridLoadingCard />
+      <ItemGridLoadingCard />
     </>
   );
 }
