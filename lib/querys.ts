@@ -1,42 +1,44 @@
-import { Item } from "@prisma/client";
+import { Item } from '@prisma/client';
+import { cache } from 'react';
+import prisma from './prisma';
 
-import prisma from "./prisma";
+export const revalidate = 60 * 60 * 6; // Cada 6 horas
 
-export const getItems = async (query?: string): Promise<Item[] | []> => {
+export const getItems = cache(async (query?: string): Promise<Item[] | []> => {
   const items = await prisma.item.findMany({
     where: {
       OR: [
         {
           nombre: {
             contains: query,
-            mode: "insensitive",
-          },
+            mode: 'insensitive'
+          }
         },
         {
           descripcion: {
             contains: query,
-            mode: "insensitive",
-          },
-        },
-      ],
+            mode: 'insensitive'
+          }
+        }
+      ]
     },
     orderBy: [
       {
-        vendido: "asc",
+        vendido: 'asc'
       },
       {
-        id: "desc",
-      },
-    ],
+        id: 'desc'
+      }
+    ]
   });
   return items;
-};
+});
 
-export const getItemBySlug = async (slug: string): Promise<Item | null> => {
+export const getItemBySlug = cache(async (slug: string): Promise<Item | null> => {
   const item = await prisma.item.findUnique({
     where: {
-      slug,
-    },
+      slug
+    }
   });
   return item;
-};
+});
