@@ -1,3 +1,4 @@
+import 'server-only';
 import { Item } from '@prisma/client';
 import { cache } from 'react';
 import prisma from './prisma';
