@@ -1,16 +1,7 @@
 import { NextResponse } from 'next/server';
-import prisma from '../../../lib/prisma';
+import { getItems } from '../../../lib/querys';
 
 export async function GET() {
-  const items = await prisma.item.findMany({
-    orderBy: [
-      {
-        vendido: 'asc'
-      },
-      {
-        id: 'desc'
-      }
-    ]
-  });
+  const items = await getItems();
   return NextResponse.json(items);
 }
