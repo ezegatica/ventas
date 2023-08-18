@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const secretDB = await get('secret');
 
   if (secret !== secretDB) {
-        console.warn("Intento fallido de revalidacion (Secret incorrecto)")
+    console.warn("Intento fallido de revalidacion (Secret incorrecto)")
     return NextResponse.json({ message: 'El secret token ingresado no es válido' }, { status: 401 })
   }
 
