@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (path) {
-    revalidatePath(`/p/${path}`);
+    revalidatePath(path);
     console.info(`Path '${path}' revalidado`)
   }
 
