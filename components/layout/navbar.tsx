@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Search from "./search";
 
 export default function Navbar() {
   return (
@@ -16,13 +15,10 @@ export default function Navbar() {
                   width={64}
                   quality={25}
                   src="https://i.ezegatica.com/logo-64.png"
-                  alt="Your Company"
+                  alt="Eze Gatica"
                 />
               </Link>
             </div>
-          </div>
-          <div className="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
-            <Search />
           </div>
         </div>
       </div>

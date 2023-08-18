@@ -15,8 +15,11 @@ type Props = {
   params: { slug: string };
 };
 
-export const revalidate = 3600;
-export const dynamic = 'auto';
+export const dynamic = 'force-static',
+  dynamicParams = true;
+export function generateStaticParams() {
+  return [];
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getItemBySlug(params.slug);
@@ -63,10 +66,6 @@ export default async function ProductPage({ params }: Props) {
     redirect(
       `https://api.whatsapp.com/send?phone=${phone}&text=Hola! Estoy interesado en el producto de tu venta de garage '${item?.nombre}'`
     );
-  }
-
-  function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(' ');
   }
 
   return (
