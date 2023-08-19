@@ -16,7 +16,7 @@ export default function ItemCard({ item }: ItemCardProps) {
             src={item.imagen[0]}
             width={224}
             height={224}
-            quality={20}
+            quality={60}
             loading="lazy"
             alt={`Imagen de ${item.nombre}`}
             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
