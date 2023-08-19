@@ -31,7 +31,7 @@ export function Gallery({
           <GridTileImage
             src={images[currentImage]?.src as string}
             alt={images[currentImage]?.altText as string}
-            quality={60}
+            quality={70}
             width={500}
             height={500}
             isInteractive={false}
