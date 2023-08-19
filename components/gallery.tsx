@@ -31,7 +31,7 @@ export function Gallery({
           <GridTileImage
             src={images[currentImage]?.src as string}
             alt={images[currentImage]?.altText as string}
-            quality={50}
+            quality={60}
             width={500}
             height={500}
             isInteractive={false}
@@ -74,9 +74,9 @@ export function Gallery({
                 <GridTileImage
                   alt={image?.altText}
                   src={image.src}
-                  quality={50}
-                  width={500}
-                  height={500}
+                  quality={60}
+                  width={250}
+                  height={250}
                   background="purple-dark"
                   active={isActive}
                 />
