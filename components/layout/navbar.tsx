@@ -11,9 +11,9 @@ export default function Navbar() {
               <Link href="/">
                 <Image
                   className="block h-8 w-auto"
-                  height={64}
-                  width={64}
-                  quality={25}
+                  height={32}
+                  width={32}
+                  quality={10}
                   src="https://i.ezegatica.com/logo-64.png"
                   alt="Eze Gatica"
                 />

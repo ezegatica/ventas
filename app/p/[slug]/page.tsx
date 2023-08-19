@@ -10,6 +10,7 @@ import { getItemBySlug } from '../../../lib/querys';
 import { Metadata } from 'next';
 import config from '@/app/config';
 import React from 'react';
+import BuyButton from './buy-button';
 
 type Props = {
   params: { slug: string };
@@ -59,14 +60,7 @@ export default async function ProductPage({ params }: Props) {
   if (!item) {
     notFound();
   }
-
-  async function consultarItem() {
-    'use server';
-    const phone = await get('phone');
-    redirect(
-      `https://api.whatsapp.com/send?phone=${phone}&text=Hola! Estoy interesado en el producto de tu venta de garage '${item?.nombre}'`
-    );
-  }
+  const phone = await get('phone');
 
   return (
     <div>
@@ -159,28 +153,7 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </div>
           </section>
-          <form action={consultarItem}>
-            <button
-              aria-label="Add item to cart"
-              disabled={item.vendido}
-              type="submit"
-              className={clsx(
-                'mt-2 flex w-full items-center justify-center bg-gray-700 p-4 text-sm uppercase tracking-wide text-white opacity-90 hover:opacity-100',
-                {
-                  'cursor-not-allowed opacity-60': item.vendido
-                }
-              )}
-            >
-              {item.vendido ? 'No disponible!' : 'Consultar!'}{' '}
-              <Image
-                src="/whatsapp.svg"
-                height={24}
-                width={24}
-                className="ml-2"
-                alt="WhatsApp icon"
-              />
-            </button>
-          </form>
+          <BuyButton item={item} phone={phone?.toString() ?? ''} />
         </div>
       </div>
     </div>
