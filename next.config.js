@@ -3,9 +3,7 @@ const nextConfig = {
   images: {
     domains: ['cdn.ezegatica.com', 'i.ezegatica.com', 'gatica.sirv.com', 'tailwindui.com']
   },
-  experimental: {
-    serverActions: true
-  },
+  experimental: {},
 }
 
 module.exports = nextConfig
