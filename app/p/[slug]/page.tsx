@@ -13,7 +13,7 @@ import React from 'react';
 import BuyButton from './buy-button';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export const dynamic = 'force-static',
@@ -22,7 +22,8 @@ export function generateStaticParams() {
   return [];
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const item = await getItemBySlug(params.slug);
   if (!item) {
     return {
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${item?.nombre} - ${config.siteName}`,
+    metadataBase: new URL(config.siteUrl),
     description: item?.short_descripcion,
     openGraph: {
       title: `${item?.nombre} - ${config.siteName}`,
@@ -55,7 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage(props: Props) {
+  const params = await props.params;
   const item = await getItemBySlug(params.slug);
   if (!item) {
     notFound();
