@@ -4,7 +4,6 @@ const nextConfig = {
     domains: ['cdn.ezegatica.com', 'i.ezegatica.com', 'gatica.sirv.com', 'tailwindui.com']
   },
   experimental: {
-    appDir: true,
     serverActions: true
   },
 }
