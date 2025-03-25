@@ -7,6 +7,7 @@ import ItemCard from '../components/ui/item-card';
 
 export const metadata: Metadata = {
   title: config.siteName,
+  metadataBase: new URL(config.siteUrl),
   description:
     'Sitio de compra de productos usados que ya no necesito. Todos los productos se encuentran en buen estado y funcionando.',
   openGraph: {
